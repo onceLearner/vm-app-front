@@ -1,0 +1,102 @@
+<div class="flex flex-col item-center space-y-4 ">
+
+
+
+
+    <div class="flex justify-evenly items-center  p-4 ">
+        <div class="text-3xl text-blue-600 font-extrabold">
+            VM App
+
+        </div>
+
+
+        <div class="flex flex-center items-center space-x-2 ">
+
+            <a *ngIf="isConnected" routerLink="/add"
+                class="text-sm font-medium px-4 p-2 bg-gray-300 rounded-lg hover:text-blue-500 hover:bg-gray-200">Ajouter
+                une machine </a>
+
+            <button *ngIf="isConnected" (click)="handle_connect(isConnected)">Deconnexion </button>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+    <div *ngIf="isConnected==false" class="flex items-center flex-col space-y-6 p-10 ">
+        <h1 class="text-4xl font-medium ">
+            Connecter Vous!
+        </h1>
+
+        <button (click)="handle_connect(isConnected)"
+            class=" font-medium p-2 w-60 bg-blue-600 text-gray-100 rounded-lg hover:text-blue-500 hover:bg-gray-200">
+            Connexion</button>
+    </div>
+
+
+
+
+    <div *ngIf="isConnected" class="grid grid-cols-4 gap-6 p-2 md:px-8 md:p-4">
+
+        <ng-container *ngFor="let vm of vms ">
+
+
+
+
+
+            <div class="  p-5 bg-gray-100 rounded-lg border border-gray-200">
+
+                <div class="flex items-center space-x-2 py-1">
+                    <label class="text-sm text-gray-600 w-20">Machine</label>
+                    <span>{{vm.nom}}</span>
+                </div>
+                <div class="flex items-center space-x-2 py-1">
+                    <label class="text-sm text-gray-600 w-20">IP</label>
+                    <span>{{vm.ip}}</span>
+                </div>
+                <div class="flex items-center space-x-2 py-1">
+                    <label class="text-sm text-gray-600 w-20">Etat</label>
+                    <span *ngIf="vm.etat==true" class="text-green-600 font-medium">Demarree</span>
+                    <span *ngIf="vm.etat==false" class="text-red-600 font-medium">Arretee</span>
+
+
+                </div>
+
+
+                <div class="p-2">
+
+                    <button (click)="arreter_vm(vm.ip)" *ngIf="vm.etat==true"
+                        class="text-sm font-medium text-gray-100 bg-red-600 p-2 px-6 rounded-lg hover:bg-red-400">
+                        Arreter </button>
+                    <button *ngIf="vm.etat==false" (click)="demarrer_vm(vm.ip)"
+                        class="text-sm font-medium text-gray-100 bg-green-600 p-2 px-6 rounded-lg hover:bg-green-400">
+                        Demarrer </button>
+
+
+                    <!-- <p (click)="navigate_about(vm.id)" class="text-lg font-medium text-gray-800  ">{{ vm.nom }}
+                    </p> -->
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </ng-container>
+
+
+
+    </div>
+
+
+
+
+</div>

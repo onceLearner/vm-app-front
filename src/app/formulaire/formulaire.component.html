@@ -1,0 +1,68 @@
+<div class="flex flex-col items-center p-6">
+
+    <div class="flex items-center justify-center space-x-10">
+
+        <h1 class="text-3xl text-blue-600 font-extrabold">
+
+            VM APP
+        </h1>
+
+        <h2>Ajout d'une VM</h2>
+
+    </div>
+
+
+
+
+
+    <form #myform="ngForm" (ngSubmit)="onSubmit(myform)"
+        class="Form flex flex-col space-y-4  p-10 pb-20 border  border-gray-100 rounded-lg ">
+
+        <h4 class="text-center text-gray-600  text-lg font-bold">Formulaire d'ajout d'une VM</h4>
+
+        <div class="flex items-center space-x-3">
+            <label>Nom</label>
+            <input placeholder="entrer le nom de la machine " class="p-2  pr-16 border rounded-lg " type="text"
+                name="nom" ngModel>
+
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <label>IP</label>
+            <input placeholder="entrer votre email ..." class="p-2  pr-16 border rounded-lg " type="text" name="ip"
+                ngModel>
+
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <label>systeme d'exploitation</label>
+            <input placeholder="entrer votre email ..." class="p-2  pr-16 border rounded-lg " type="text" name="systeme"
+                ngModel>
+
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <label>etat</label>
+
+            <input type="radio" id="1" name="etat" value="false" ngModel>
+            <label for="1">Arretee</label><br>
+            <input type="radio" id="2" name="etat" value="true" ngModel>
+            <label for="2">Demarree</label><br>
+
+        </div>
+
+
+        <button class="bg-blue-600 p-2 px-5 mx-20  rounded-lg  hover:opacity-80 text-gray-100">
+            Ajouter
+        </button>
+
+
+
+
+    </form>
+
+
+
+
+
+</div>
