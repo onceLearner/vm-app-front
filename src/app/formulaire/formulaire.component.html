@@ -44,7 +44,7 @@
         <div class="flex items-center space-x-3">
             <label>etat</label>
 
-            <input type="radio" id="1" name="etat" value="false" ngModel>
+            <input type="radio" id="1" name="etat" value="false" ngModel checked>
             <label for="1">Arretee</label><br>
             <input type="radio" id="2" name="etat" value="true" ngModel>
             <label for="2">Demarree</label><br>
@@ -55,6 +55,8 @@
         <button class="bg-blue-600 p-2 px-5 mx-20  rounded-lg  hover:opacity-80 text-gray-100">
             Ajouter
         </button>
+
+        <div v [innerHTML]="message"></div>
 
 
 

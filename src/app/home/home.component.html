@@ -71,10 +71,10 @@
 
                 <div class="p-2">
 
-                    <button (click)="arreter_vm(vm.ip)" *ngIf="vm.etat==true"
+                    <button (click)="hanlde_modify_state(vm.ip,vm.etat)" *ngIf="vm.etat==true"
                         class="text-sm font-medium text-gray-100 bg-red-600 p-2 px-6 rounded-lg hover:bg-red-400">
                         Arreter </button>
-                    <button *ngIf="vm.etat==false" (click)="demarrer_vm(vm.ip)"
+                    <button *ngIf="vm.etat==false" (click)="hanlde_modify_state(vm.ip,vm.etat)"
                         class="text-sm font-medium text-gray-100 bg-green-600 p-2 px-6 rounded-lg hover:bg-green-400">
                         Demarrer </button>
 

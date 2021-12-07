@@ -18,53 +18,86 @@ export class HomeComponent implements OnInit {
 
   public vms: Array<VMachine> | undefined
 
-  public isConnected = false
+  public isConnected = Boolean(JSON.parse(window.localStorage.getItem("isConnected"))) || false
 
 
 
-
-  arreter_vm(ip: string) {
-
-    let response = confirm("voulez-vous vraiment arreter la machine ?")
-    if (response) {
-      this.vms.find(item => item.ip == ip).etat = false
-    }
-  }
-
-  demarrer_vm(ip: string) {
-
-    this.vms.find(item => item.ip == ip).etat = true
-
-
-  }
 
   handle_connect(flag: Boolean) {
 
+
+
     this.isConnected = !flag
+    window.localStorage.setItem("isConnected", `${!flag}`)
 
   }
 
-  ngOnInit(): void {
-    this.vms = [{
-      nom: "vm1",
-      ip: "10.010",
-      systeme: "linux",
-      etat: true
-    },
 
-    {
-      nom: "vm3",
-      ip: "10.0102",
-      systeme: "linux",
-      etat: false
+  hanlde_modify_state(ip: string, etat: boolean) {
+
+    if (etat) {
+      if (confirm("voulez-vous vraiment arreter la machine ?")) {
+
+        this.httpService.modify_vm(ip, etat)
+          .then(res => {
+            console.log(res)
+
+
+            // update the list
+            this.httpService.get_all_VMS()
+              .then(res => {
+                console.log({ res })
+                this.vms = res.data
+
+              })
+              .catch(err => console.error(err))
+          })
+          .catch(er => console.error(er))
+
+      }
+
     }
-      ,
-    {
-      nom: "vm2",
-      ip: "10.0103",
-      systeme: "Windows",
-      etat: true
-    }]
+    else {
+      this.httpService.modify_vm(ip, etat)
+        .then(res => {
+          console.log(res)
+
+
+          this.httpService.get_all_VMS()
+            .then(res => {
+              console.log({ res })
+              this.vms = res.data
+
+            })
+            .catch(err => console.error(err))
+
+        })
+        .catch(er => console.error(er))
+
+    }
+
+
+  }
+
+
+
+
+
+  ngOnInit(): void {
+
+
+    this.httpService.get_all_VMS()
+      .then(res => {
+        console.log({ res })
+        this.vms = res.data
+
+      })
+      .catch(err => console.error(err))
+
+
+
+
+
   }
 
 
